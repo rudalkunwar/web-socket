@@ -5,6 +5,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Events\ExampleEvent;
 use App\Http\Controllers\MessageController;
+use App\Events\MyEvent;
+
 
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
@@ -12,17 +14,3 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 
 
 Route::post('movie/add', [MovieController::class, 'store']);
-
-
-Route::get('/test-broadcast', function () {
-    event(new ExampleEvent('Hello World'));
-    return 'Broadcast event sent!';
-});
-
-
-Route::post('/test', [MessageController::class, 'test'])->withoutMiddleware('csrf');;
-Route::get('/test', function () {
-    return response()->json('hello');
-});
-
-Route::post('/send-message', [MessageController::class, 'sendMessage']);
