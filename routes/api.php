@@ -20,6 +20,9 @@ Route::get('/test-broadcast', function () {
 });
 
 
-Route::middleware(['cors'])->post('/test', [MessageController::class, 'test']);
+Route::post('/test', [MessageController::class, 'test'])->withoutMiddleware('csrf');;
+Route::get('/test', function () {
+    return response()->json('hello');
+});
 
 Route::post('/send-message', [MessageController::class, 'sendMessage']);
